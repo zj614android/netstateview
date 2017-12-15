@@ -1,0 +1,8 @@
+<resources>
+
+
+    <style name="NetworkStateViewTheme" parent="NetworkStateView.Style">
+        <item name="nsvTextSize">16sp</item>
+    </style>
+
+</resources>
