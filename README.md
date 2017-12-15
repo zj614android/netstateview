@@ -134,6 +134,9 @@ public class CommonActivity extends BaseAppCompatActivity {
 
 这只是普通activity内的，还有fragment和带有actionbar的activity的使用方式。详细见demo
 
+### 局限性：
+根布局用这个组件进行布局的时候，由于他是一个LinearLayout，且只支持vertical。
+
 ## 三个包装类：
 > NetObserverActivity.java
 > NetObserverAppCompatActivity.java
