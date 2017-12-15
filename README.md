@@ -15,6 +15,29 @@ https://github.com/AlarmZeng/NetworkStateView
 - 1.主要是工作中用到了多种网络状态切换，然后同事一看对我说，“你这用着不爽，每个类都要去include一下。不开心”。
 - 2.将网络监测相关代码汇总到NetObserverActivity，NetObserverAppCompatActivity，NetObserverFragment，详见Demo。
 
+# Target！
+我们的目标是！~~没有蛀牙!~~ 让网络状态View逻辑上变得简单。
+
+## 也就是说要实现这样的效果时，我们只需要做如下操作：
+![](https://wx3.sinaimg.cn/mw690/0061ejqJly1fmhb2986yng30810fz1kx.gif)![](https://wx3.sinaimg.cn/mw690/0061ejqJly1fmhb27x4jkg307y0fze2j.gif)
+
+- BaseActivity/BaseFragment extentds NetObserverActivity/NetObserverFragment
+- - BaseActivity/BaseFragment 内编写如下代码：
+>  super.initNetState(rootView);//rootView是页面根布局
+- 页面根布局定义为：
+```xml
+<com.netstatus.NetLinearWrapContainer xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparent"
+    android:orientation="vertical"
+    tools:context="com.sound.haolei.operate.ui.fragment.HomeFragment">
+```
+关注的这3个点，便可以轻松的使用这个库。（其实本人还想再将这3个点省去，但是奈何水平有限，还是会产生一定的侵入代码）
+
+
 # Dependencies！
 - Step 1. Add it in your root build.gradle at the end of repositories:
 ```java
@@ -134,6 +157,40 @@ public class CommonActivity extends BaseAppCompatActivity {
 
 这只是普通activity内的，还有fragment和带有actionbar的activity的使用方式。详细见demo
 
+### 一个自定义属性：
+```java
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="NetLinearWrapContainer">
+        <attr name="haveActionBar" format="boolean" />
+    </declare-styleable>
+
+</resources>
+```
+这个属性的作用是啥呢？当界面内需要用网络视图布局覆盖的组件有ActionBar的时候，那么这时候你就应该设置这个属性为true那么这个Ui会自动添加到布局元素的index2，布局的index机制请自行百度。
+> app:haveActionBar="true"
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<com.netstatus.NetLinearWrapContainer xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    app:haveActionBar="true"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="突突突~突突~"
+        android:textSize="30sp" />
+
+</com.netstatus.NetLinearWrapContainer>
+
+```
 ### 局限性：
 根布局用这个组件进行布局的时候，由于他是一个LinearLayout，且只支持vertical。
 
@@ -221,15 +278,11 @@ $NetObserverAppCompatActivity.java
 
 
 # Demo
-![](https://wx3.sinaimg.cn/mw690/0061ejqJly1fmhb2986yng30810fz1kx.gif)![](https://wx3.sinaimg.cn/mw690/0061ejqJly1fmhb27x4jkg307y0fze2j.gif)
 
 [GitHub项目地址](https://github.com/zj614android/netstateview)
 [结合网络请求使用的Demo](https://github.com/zj614android/NetstatusTestWithPostNet)
 [基本接入使用的Demo](https://github.com/zj614android/NetStateDemo)
 
 **最后，后面我会补上实现细节，并发一个帖子，有错误的地方请直接指出，我会修正改进，感谢。**
-
-
-
 
 
