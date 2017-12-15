@@ -1,6 +1,3 @@
-# netstateview
-网络状态View
-
 # What？
 
 **本库是基于该项目进行的二次封装：**
