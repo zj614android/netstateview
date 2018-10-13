@@ -1,17 +1,5 @@
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-
-    dependencies {
-//        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.0'
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.2'
-    }
-}
-
 apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
+
 
 android {
     compileSdkVersion 24
